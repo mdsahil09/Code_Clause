@@ -1,0 +1,99 @@
+import java.util.Scanner;
+
+public class ScientificCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Scientific Calculator");
+            System.out.println("1. Addition");
+            System.out.println("2. Subtraction");
+            System.out.println("3. Multiplication");
+            System.out.println("4. Division");
+            System.out.println("5. Square Root");
+            System.out.println("6. Power");
+            System.out.println("7. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            if (choice == 7) {
+                System.out.println("Exiting the calculator. Goodbye!");
+                break;
+            }
+
+            switch (choice) {
+                case 1:
+                    performAddition();
+                    break;
+                case 2:
+                    performSubtraction();
+                    break;
+                case 3:
+                    performMultiplication();
+                    break;
+                case 4:
+                    performDivision();
+                    break;
+                case 5:
+                    performSquareRoot();
+                    break;
+                case 6:
+                    performPower();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static void performAddition() {
+        double num1 = getNumber("Enter the first number: ");
+        double num2 = getNumber("Enter the second number: ");
+        System.out.println("Result: " + (num1 + num2));
+    }
+
+    private static void performSubtraction() {
+        double num1 = getNumber("Enter the first number: ");
+        double num2 = getNumber("Enter the second number: ");
+        System.out.println("Result: " + (num1 - num2));
+    }
+
+    private static void performMultiplication() {
+        double num1 = getNumber("Enter the first number: ");
+        double num2 = getNumber("Enter the second number: ");
+        System.out.println("Result: " + (num1 * num2));
+    }
+
+    private static void performDivision() {
+        double num1 = getNumber("Enter the dividend: ");
+        double num2 = getNumber("Enter the divisor: ");
+
+        if (num2 != 0) {
+            System.out.println("Result: " + (num1 / num2));
+        } else {
+            System.out.println("Cannot divide by zero.");
+        }
+    }
+
+    private static void performSquareRoot() {
+        double num = getNumber("Enter the number: ");
+        if (num >= 0) {
+            System.out.println("Result: " + Math.sqrt(num));
+        } else {
+            System.out.println("Cannot calculate square root of a negative number.");
+        }
+    }
+
+    private static void performPower() {
+        double base = getNumber("Enter the base: ");
+        double exponent = getNumber("Enter the exponent: ");
+        System.out.println("Result: " + Math.pow(base, exponent));
+    }
+
+    private static double getNumber(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(prompt);
+        return scanner.nextDouble();
+    }
+}
