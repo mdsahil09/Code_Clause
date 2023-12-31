@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Default background color */
+        }
+
+        #imageUpload {
+            display: none;
+        }
+    </style>
+    <title>Image Background Remover</title>
+</head>
+<body>
+    <input type="file" id="imageUpload" accept="image/*" onchange="removeBackground()">
+    <label for="imageUpload" style="cursor: pointer;">
+        <p>Click to Upload Image</p>
+    </label>
+
+    <script>
+        function removeBackground() {
+            const input = document.getElementById('imageUpload');
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+
+                    // Draw image onto canvas
+                    ctx.drawImage(img, 0, 0);
+
+                    // Set a fixed background color
+                    const backgroundColor = '#ffffff';
+                    ctx.globalCompositeOperation = 'destination-over';
+                    ctx.fillStyle = backgroundColor;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Convert canvas to base64 data URL
+                    const resultDataURL = canvas.toDataURL('image/png');
+
+                    // Display the result
+                    document.body.style.backgroundImage = `url(${resultDataURL})`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundRepeat = 'no-repeat';
+                };
+
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+</body>
+</html>
