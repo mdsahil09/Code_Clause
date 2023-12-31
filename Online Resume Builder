@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+class Resume {
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String education;
+    private String experience;
+
+    public Resume(String name, String email, String phoneNumber, String education, String experience) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.education = education;
+        this.experience = experience;
+    }
+
+    @Override
+    public String toString() {
+        return "Resume:\n" +
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n" +
+                "Phone Number: " + phoneNumber + "\n" +
+                "Education: " + education + "\n" +
+                "Experience: " + experience;
+    }
+}
+
+class ResumeBuilder {
+    public static Resume buildResume() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter your email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter your phone number: ");
+        String phoneNumber = scanner.nextLine();
+
+        System.out.print("Enter your education: ");
+        String education = scanner.nextLine();
+
+        System.out.print("Enter your experience: ");
+        String experience = scanner.nextLine();
+
+        return new Resume(name, email, phoneNumber, education, experience);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Welcome to the Online Resume Builder!");
+        Resume resume = ResumeBuilder.buildResume();
+        System.out.println(resume);
+    }
+}
