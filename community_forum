@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #postForm {
+            margin-top: 20px;
+        }
+
+        .post {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .post .user {
+            font-weight: bold;
+        }
+
+        .post .date {
+            color: #888;
+        }
+
+        .post .content {
+            margin-top: 10px;
+        }
+    </style>
+    <title>Community Forum</title>
+</head>
+<body>
+    <header>
+        <h1>Community Forum</h1>
+    </header>
+
+    <main>
+        <div id="posts">
+            <!-- Forum posts will be displayed here -->
+        </div>
+
+        <form id="postForm">
+            <h2>Create a Post</h2>
+            <label for="userName">Your Name:</label>
+            <input type="text" id="userName" required>
+
+            <label for="postContent">Post Content:</label>
+            <textarea id="postContent" rows="4" required></textarea>
+
+            <button type="button" onclick="submitPost()">Submit Post</button>
+        </form>
+    </main>
+
+    <script>
+        function submitPost() {
+            const userName = document.getElementById('userName').value;
+            const postContent = document.getElementById('postContent').value;
+
+            const postsContainer = document.getElementById('posts');
+
+            const postElement = document.createElement('div');
+            postElement.classList.add('post');
+
+            const userElement = document.createElement('div');
+            userElement.classList.add('user');
+            userElement.textContent = userName;
+
+            const dateElement = document.createElement('div');
+            dateElement.classList.add('date');
+            const currentDate = new Date().toLocaleString();
+            dateElement.textContent = currentDate;
+
+            const contentElement = document.createElement('div');
+            contentElement.classList.add('content');
+            contentElement.textContent = postContent;
+
+            postElement.appendChild(userElement);
+            postElement.appendChild(dateElement);
+            postElement.appendChild(contentElement);
+
+            postsContainer.appendChild(postElement);
+        }
+    </script>
+</body>
+</html>
