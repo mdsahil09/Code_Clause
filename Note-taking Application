@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Note {
+    private String title;
+    private String content;
+
+    public Note(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    @Override
+    public String toString() {
+        return "Title: " + title + "\nContent: " + content;
+    }
+}
+
+class NoteManager {
+    private ArrayList<Note> notes;
+
+    public NoteManager() {
+        notes = new ArrayList<>();
+    }
+
+    public void addNote(Note note) {
+        notes.add(note);
+    }
+
+    public void displayNotes() {
+        if (notes.isEmpty()) {
+            System.out.println("No notes available.");
+        } else {
+            System.out.println("Your Notes:");
+            for (Note note : notes) {
+                System.out.println(note);
+                System.out.println("---------------");
+            }
+        }
+    }
+}
+
+public class NoteTakingApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        NoteManager noteManager = new NoteManager();
+
+        while (true) {
+            System.out.println("Note Taking Application");
+            System.out.println("1. Add a Note");
+            System.out.println("2. View Notes");
+            System.out.println("3. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            scanner.nextLine(); // Consume the newline character
+
+            if (choice == 3) {
+                System.out.println("Exiting the note-taking application. Goodbye!");
+                break;
+            }
+
+            switch (choice) {
+                case 1:
+                    addNote(scanner, noteManager);
+                    break;
+                case 2:
+                    noteManager.displayNotes();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static void addNote(Scanner scanner, NoteManager noteManager) {
+        System.out.print("Enter the title of the note: ");
+        String title = scanner.nextLine();
+        System.out.print("Enter the content of the note: ");
+        String content = scanner.nextLine();
+
+        Note note = new Note(title, content);
+        noteManager.addNote(note);
+        System.out.println("Note added successfully.");
+    }
+}
