@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #reviewForm {
+            margin-top: 20px;
+        }
+
+        .review {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .review .user {
+            font-weight: bold;
+        }
+
+        .review .date {
+            color: #888;
+        }
+
+        .stars {
+            color: #f39c12;
+        }
+    </style>
+    <title>Product Reviews System</title>
+</head>
+<body>
+    <header>
+        <h1>Product Reviews System</h1>
+    </header>
+
+    <main>
+        <div id="reviews">
+            <!-- Reviews will be displayed here -->
+        </div>
+
+        <form id="reviewForm">
+            <h2>Write a Review</h2>
+            <label for="userName">Your Name:</label>
+            <input type="text" id="userName" required>
+
+            <label for="userReview">Your Review:</label>
+            <textarea id="userReview" rows="4" required></textarea>
+
+            <label for="userRating">Your Rating:</label>
+            <select id="userRating" required>
+                <option value="5">5 stars</option>
+                <option value="4">4 stars</option>
+                <option value="3">3 stars</option>
+                <option value="2">2 stars</option>
+                <option value="1">1 star</option>
+            </select>
+
+            <button type="button" onclick="submitReview()">Submit Review</button>
+        </form>
+    </main>
+
+    <script>
+        function submitReview() {
+            const userName = document.getElementById('userName').value;
+            const userReview = document.getElementById('userReview').value;
+            const userRating = document.getElementById('userRating').value;
+
+            const reviewContainer = document.getElementById('reviews');
+
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review');
+
+            const userElement = document.createElement('div');
+            userElement.classList.add('user');
+            userElement.textContent = userName;
+
+            const dateElement = document.createElement('div');
+            dateElement.classList.add('date');
+            const currentDate = new Date().toLocaleDateString();
+            dateElement.textContent = currentDate;
+
+            const starsElement = document.createElement('div');
+            starsElement.classList.add('stars');
+            starsElement.textContent = '★'.repeat(userRating);
+
+            reviewElement.appendChild(userElement);
+            reviewElement.appendChild(dateElement);
+            reviewElement.appendChild(starsElement);
+
+            const reviewTextElement = document.createElement('div');
+            reviewTextElement.textContent = userReview;
+
+            reviewElement.appendChild(reviewTextElement);
+
+            reviewContainer.appendChild(reviewElement);
+        }
+    </script>
+</body>
+</html>
